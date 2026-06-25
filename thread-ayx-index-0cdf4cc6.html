@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 · 聚焦休闲与探索</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fbe9e0 0%, #f8d5c0 50%, #f3c8b0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.2rem;
+            color: #2e241f;
+            line-height: 1.6;
+        }
+
+        .page {
+            max-width: 880px;
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            background: rgba(255, 245, 235, 0.75);
+            backdrop-filter: blur(4px);
+            border-radius: 48px 48px 24px 24px;
+            padding: 3rem 2.2rem 2.8rem;
+            text-align: center;
+            margin-bottom: 2.4rem;
+            box-shadow: 0 12px 30px rgba(160, 100, 70, 0.15);
+            border: 1px solid rgba(255, 230, 215, 0.5);
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #3d2b21;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero .sub {
+            font-size: 1.2rem;
+            color: #6f4f3d;
+            background: rgba(255, 220, 200, 0.5);
+            display: inline-block;
+            padding: 0.3rem 1.8rem;
+            border-radius: 30px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            max-width: 640px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            color: #4d382b;
+        }
+
+        /* cards section */
+        .section-card {
+            background: #ffffffd9;
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            padding: 2rem 2.4rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 6px 18px rgba(140, 90, 60, 0.08);
+            border: 1px solid #ffede2;
+        }
+
+        .section-card h2 {
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: #3d2b1f;
+            border-left: 5px solid #d99b7a;
+            padding-left: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .feature-item {
+            background: #fffbf7;
+            padding: 1.4rem 1.2rem;
+            border-radius: 24px;
+            border: 1px solid #f7ded0;
+            transition: 0.2s;
+        }
+
+        .feature-item:hover {
+            background: #fff5ed;
+            border-color: #dbb09a;
+        }
+
+        .feature-item h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #542f1e;
+            margin-bottom: 0.4rem;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #4d3c30;
+        }
+
+        .desc-block {
+            margin: 1.2rem 0 0.6rem;
+        }
+
+        .desc-block p {
+            margin-bottom: 0.9rem;
+        }
+
+        .desc-block ul {
+            list-style: none;
+            padding-left: 0.5rem;
+        }
+
+        .desc-block li {
+            padding: 0.35rem 0 0.35rem 1.4rem;
+            position: relative;
+            color: #3a2c22;
+        }
+
+        .desc-block li::before {
+            content: "·";
+            color: #bf7f60;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .faq-summary {
+            padding: 0.6rem 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #edd9cb;
+            padding: 1rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #4d2e1d;
+            margin-bottom: 0.25rem;
+        }
+
+        .faq-a {
+            color: #5c4537;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            text-align: center;
+            padding: 1.8rem 1rem 0.8rem;
+            border-top: 1px solid #edd5c5;
+            margin-top: 0.6rem;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #dba78a;
+            color: #2c1b12;
+            padding: 0.7rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(180, 110, 70, 0.15);
+            border: 1px solid #f0cfbd;
+        }
+
+        .btn-link:hover {
+            background: #cf8f6f;
+            transform: scale(1.02);
+            color: #1f120c;
+            border-color: #c78664;
+        }
+
+        .footer-links p {
+            margin-top: 1.2rem;
+            font-size: 0.9rem;
+            color: #6a5447;
+        }
+
+        .footer-links a {
+            color: #8f5e44;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .footer-links a:hover {
+            color: #633b26;
+        }
+
+        .inline-link {
+            color: #9f603f;
+            font-weight: 500;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: 0.15s;
+        }
+
+        .inline-link:hover {
+            color: #673a22;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+
+            .hero {
+                padding: 2rem 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-card {
+                padding: 1.6rem 1.2rem;
+                border-radius: 24px;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .hero .sub {
+                font-size: 1rem;
+                padding: 0.2rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero -->
+    <div class="hero">
+        <h1>爱游戏</h1>
+        <div class="sub">轻量 · 探索 · 陪伴</div>
+        <p>
+            在快节奏的日常里，保留一个可以放松沉浸的小角落。<br>
+            不必刻意追求成就，只是享受游戏本身的乐趣。
+        </p>
+    </div>
+
+    <!-- 优势区 -->
+    <div class="section-card">
+        <h2>为什么值得花时间在游戏里</h2>
+        <div class="grid-2">
+            <div class="feature-item">
+                <h3>🧩 低门槛享受</h3>
+                <p>没有复杂的规则或漫长的教程，打开就能进入状态。适合碎片时间，也适合静下来慢慢玩。</p>
+            </div>
+            <div class="feature-item">
+                <h3>🌱 温和的正反馈</h3>
+                <p>每一次小操作都能看到即时反馈，不会因为一次失误就前功尽弃。节奏由自己掌控。</p>
+            </div>
+            <div class="feature-item">
+                <h3>🎨 视觉与听觉的放松</h3>
+                <p>柔和的色彩搭配、不刺眼的界面、舒适的背景音，让感官也得到片刻休息。</p>
+            </div>
+            <div class="feature-item">
+                <h3>🤝 社区里的同好</h3>
+                <p>在 <a href="https://thread-ayx.com.cn" class="inline-link">爱游戏</a> 的氛围里，玩家们分享心得、记录日常，安静地交流。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 说明区 -->
+    <div class="section-card">
+        <h2>关于游戏与日常</h2>
+        <div class="desc-block">
+            <p>
+                很多人提到“游戏”会联想到竞争、强度、耗时。但其实有一类游戏更接近“数字散步”——你可以在里面随意走走，看看风景，听听音乐，或者完成一些简单的小任务。它们不催促你，也不惩罚你。
+            </p>
+            <p>
+                这种体验很适合放在一天中的任意时刻：午休前、通勤路上、或者睡前半小时。不需要投入太多精力，却能有效转换心情。
+            </p>
+            <ul>
+                <li>解谜、收集、建造、模拟 —— 类型丰富但节奏舒缓</li>
+                <li>单次游玩时长灵活，5 分钟到 1 小时都可以自然停下</li>
+                <li>存档方式友好，不会因为中断而丢失进度</li>
+            </ul>
+            <p>
+                如果你也喜欢这种“刚刚好”的游戏感，不妨试试 <a href="https://thread-ayx.com.cn" class="inline-link">爱游戏</a> 里收录的内容。它们大多经过筛选，更适合安静地体验。
+            </p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="section-card">
+        <h2>常见想法 · 简短回应</h2>
+        <div class="faq-summary">
+            <div class="faq-item">
+                <div class="faq-q">Q: 我平时几乎不玩游戏，能适应吗？</div>
+                <div class="faq-a">不少作品本身就是为轻度用户设计的，操作直观，引导自然。你可以从最简单的那一类开始。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Q: 这些游戏需要付费吗？</div>
+                <div class="faq-a">很大一部分是免费可玩的，部分有扩展内容或自愿赞助选项。页面会清晰标注，没有隐藏扣费。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Q: 在电脑上玩还是在手机上玩？</div>
+                <div class="faq-a">两者都有。建议根据你平时的使用习惯选择，同一款游戏通常可以跨平台存档。</div>
+            </div>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #6f5545;">
+            更多关于游戏类型、设备适配的问题，可以在 <a href="https://thread-ayx.com.cn" class="inline-link">爱游戏</a> 页面中找到对应的说明。
+        </p>
+    </div>
+
+    <!-- 底部链接 -->
+    <div class="footer-links">
+        <a href="https://thread-ayx.com.cn" class="btn-link">爱游戏</a>
+        <p>
+            一个收集轻量、有趣、不制造焦虑的游戏内容的地方。<br>
+            希望你能在这里找到属于自己的节奏。
+        </p>
+        <p style="margin-top: 0.8rem; font-size: 0.8rem; color: #8b6d5b;">
+            © 内容仅供参考 · 游戏体验因人而异
+        </p>
+    </div>
+
+</div>
+</body>
+</html>
