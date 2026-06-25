@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>知识库 · 南宫28 · 查询与对照页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f2f4f7;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            line-height: 1.65;
+            padding: 2rem 1rem;
+        }
+
+        .page-wrap {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* 标题区 / hero */
+        .hero {
+            margin-bottom: 2.5rem;
+            padding: 1.25rem 0 0.5rem 0;
+        }
+
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #0f172a;
+            border-left: 4px solid #2563eb;
+            padding-left: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            color: #475569;
+            max-width: 640px;
+            padding-left: 1.2rem;
+            border-left: 2px solid #cbd5e1;
+            margin-top: 0.25rem;
+        }
+
+        .hero .sub a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #94a3b8;
+        }
+
+        .hero .sub a:hover {
+            border-bottom: 1px solid #2563eb;
+        }
+
+        /* 网格卡片 */
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0 2.5rem 0;
+        }
+
+        @media (min-width: 640px) {
+            .section-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 960px) {
+            .section-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem 1.25rem;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+            border-color: #cbd5e1;
+        }
+
+        .card h2 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            margin-bottom: 0.9rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h2 i {
+            display: inline-block;
+            width: 6px;
+            height: 18px;
+            background: #2563eb;
+            border-radius: 4px;
+            opacity: 0.7;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #334155;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            margin-bottom: 0.55rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #64748b;
+            font-weight: 700;
+        }
+
+        .tag-badge {
+            display: inline-block;
+            background: #eef2ff;
+            color: #1e40af;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 100px;
+            margin-left: 0.5rem;
+            font-weight: 500;
+            border: 1px solid #c7d2fe;
+        }
+
+        /* 提示区 / notice */
+        .notice-area {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 1.5rem 1.75rem;
+            margin: 2rem 0 2.5rem 0;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .notice-area h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #0f172a;
+        }
+
+        .notice-area h3 span {
+            background: #f1f5f9;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #475569;
+            border: 1px solid #d1d9e6;
+        }
+
+        .notice-area p {
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
+
+        .notice-area .ref-link {
+            margin-top: 0.8rem;
+        }
+
+        .notice-area .ref-link a {
+            color: #1d4ed8;
+            text-decoration: none;
+            border-bottom: 1px dotted #94a3b8;
+        }
+
+        .notice-area .ref-link a:hover {
+            border-bottom: 1px solid #1d4ed8;
+        }
+
+        /* 相关信息区 / 对照表 */
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 0.9rem 1.25rem;
+            align-items: baseline;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+
+        .info-label {
+            flex: 0 0 120px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1e293b;
+            letter-spacing: 0.02em;
+        }
+
+        .info-value {
+            flex: 1;
+            font-size: 0.95rem;
+            color: #334155;
+            min-width: 180px;
+        }
+
+        .info-value .highlight-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #9bb1d9;
+        }
+
+        .info-value .highlight-link:hover {
+            border-bottom: 1px solid #2563eb;
+        }
+
+        /* faq摘要 */
+        .faq-mini {
+            margin-top: 2.5rem;
+            padding: 0.75rem 0 0.5rem 0;
+            border-top: 1px solid #dce2ec;
+        }
+
+        .faq-mini h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #0f172a;
+        }
+
+        .faq-item {
+            padding: 0.55rem 0;
+            border-bottom: 1px solid #edf1f7;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #1e293b;
+            flex: 0 0 100px;
+            font-size: 0.9rem;
+        }
+
+        .faq-a {
+            color: #475569;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .faq-a a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #a0b8e0;
+        }
+
+        .faq-a a:hover {
+            border-bottom: 1px solid #2563eb;
+        }
+
+        .footer-note {
+            margin-top: 2.2rem;
+            font-size: 0.85rem;
+            color: #64748b;
+            text-align: left;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1.2rem;
+        }
+
+        .footer-note a {
+            color: #475569;
+            text-decoration: none;
+            border-bottom: 1px dotted #b6c4d4;
+        }
+
+        .footer-note a:hover {
+            border-bottom: 1px solid #1e293b;
+        }
+
+        /* 简单响应调整 */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.6rem;
+                padding-left: 0.75rem;
+            }
+            .card {
+                padding: 1.2rem 1rem;
+            }
+            .info-label {
+                flex-basis: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- hero 介绍区 -->
+    <div class="hero">
+        <h1>南宫28 · 查询与对照</h1>
+        <div class="sub">
+            日常查阅、条目对照与延伸阅读 —— 以 <a href="https://portal-pc-ng28.com">南宫28</a> 为索引的知识库入口
+        </div>
+    </div>
+
+    <!-- 卡片网格（目录感布局）-->
+    <div class="section-grid">
+        <!-- 卡片：常用查询 -->
+        <div class="card">
+            <h2><i></i> 常用查询 <span class="tag-badge">检索</span></h2>
+            <ul>
+                <li>条目标识与版本对照</li>
+                <li>字段说明及类型参考</li>
+                <li>状态码与释义列表</li>
+                <li>配置参数速查表</li>
+                <li>接口端点汇总</li>
+            </ul>
+            <p style="margin-top:0.7rem;font-size:0.9rem;color:#64748b;">覆盖基础层与业务层常用条目。</p>
+        </div>
+
+        <!-- 卡片：对照说明 -->
+        <div class="card">
+            <h2><i></i> 对照说明 <span class="tag-badge">映射</span></h2>
+            <ul>
+                <li>旧版命名 → 当前字段</li>
+                <li>简写与全称对应</li>
+                <li>多语言标签映射</li>
+                <li>模块路径对照</li>
+                <li>权限角色参照表</li>
+            </ul>
+            <p style="margin-top:0.7rem;font-size:0.9rem;color:#64748b;">便于迁移、对齐与审计。</p>
+        </div>
+
+        <!-- 卡片：延伸阅读 -->
+        <div class="card">
+            <h2><i></i> 延伸阅读 <span class="tag-badge">参考</span></h2>
+            <ul>
+                <li>数据格式规范 (JSON/YAML)</li>
+                <li>常用正则与过滤规则</li>
+                <li>时间戳与时区处理</li>
+                <li>安全签名算法简述</li>
+                <li>性能指标释义</li>
+            </ul>
+            <p style="margin-top:0.7rem;font-size:0.9rem;color:#64748b;">深度扩展阅读，梳理上下文依赖。</p>
+        </div>
+    </div>
+
+    <!-- 提示区 -->
+    <div class="notice-area">
+        <h3>📌 使用提示 <span>v1.3</span></h3>
+        <p>本页面向查询与对照场景设计，所有条目均基于公开可查的参考信息整理。如需核对最新定义或查阅完整文档，可参考主站 <a href="https://portal-pc-ng28.com" style="color:#2563eb;text-decoration:underline dotted;">南宫28</a> 中各模块说明。</p>
+        <p>建议结合具体上下文进行交叉验证，尤其注意版本号、时区及自定义字段的差异。对照表仅为常用映射，不覆盖全部定制情形。</p>
+        <div class="ref-link">
+            <span style="background: #eef2ff;padding:0.2rem 0.8rem;border-radius:30px;font-size:0.8rem;">相关入口 →</span>
+            <a href="https://portal-pc-ng28.com">南宫28</a>
+        </div>
+    </div>
+
+    <!-- 相关信息区 (对照风格) -->
+    <div class="info-section">
+        <div class="info-row">
+            <span class="info-label">站点标识</span>
+            <span class="info-value"><a href="https://portal-pc-ng28.com" class="highlight-link">南宫28</a> · 主域 portal-pc-ng28</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">常见查询</span>
+            <span class="info-value">字段映射 · 状态码 · 配置键 · 端点列表</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">参考频率</span>
+            <span class="info-value">日常开发 &amp; 运维对照使用</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">延伸范围</span>
+            <span class="info-value">格式规范 · 签名 · 时区 · 过滤规则</span>
+        </div>
+    </div>
+
+    <!-- FAQ摘要 (简略) -->
+    <div class="faq-mini">
+        <h4>▍ 常见问点摘要</h4>
+        <div class="faq-item">
+            <span class="faq-q">字段对照</span>
+            <span class="faq-a">旧版与当前命名映射可在 <a href="https://portal-pc-ng28.com">南宫28</a> “对照说明”卡片中检索，注意大小写与下划线差异。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">状态码说明</span>
+            <span class="faq-a">参考状态码速查表，其中 2xx 表示正常，4xx/5xx 对应常见异常，完整列表见主站对应章节。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">延伸阅读</span>
+            <span class="faq-a">格式规范及签名算法说明位于扩展区，建议配合示例一起理解。</span>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer-note">
+        知识库 · 查询与对照 · 数据以 <a href="https://portal-pc-ng28.com">南宫28</a> 发布内容为准 · 仅供内部参考
+    </div>
+
+</div>
+</body>
+</html>
